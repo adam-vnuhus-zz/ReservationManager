@@ -1,11 +1,15 @@
 import java.util.ArrayList;
 
 public class Information {
+
     ArrayList<Client> clients;
     CreditPayment creditPayment;
     CashPayment cashPayment;
 
-    public Information(){};
+    public Information() {
+
+    }
+
     public Information(ArrayList<Client> clients, CreditPayment creditPayment, CashPayment cashPayment) {
         this.clients = clients;
         this.creditPayment = creditPayment;
