@@ -8,12 +8,7 @@ public class Information {
     CreditPayment creditPayment;
     CashPayment cashPayment;
 
-    public Information() {
-        this.reservation = new Reservation();
-        this.clients = new ArrayList<>();
-        this.creditPayment = new CreditPayment();
-        this.cashPayment = new CashPayment();
-    }
+    public Information() { }
 
     public Information(Reservation reservation, List<Client> clients, CreditPayment creditPayment, CashPayment cashPayment) {
         this.reservation = reservation;
@@ -30,10 +25,7 @@ public class Information {
         this.reservation = reservation;
     }
 
-    public List<Client> getClients() {
-
-        return clients;
-    }
+    public List<Client> getClients() {return clients; }
 
     public void setClients(List<Client> clients) {
         this.clients = clients;

@@ -5,9 +5,7 @@ public class CreditPayment extends Payment {
     private String transactionNumber;
     private String cardNumber;
 
-    public CreditPayment() {
-
-    }
+    public CreditPayment() {}
 
     public CreditPayment(double amount, Date date, String transactionNumber, String cardNumber) {
         super(amount, date);

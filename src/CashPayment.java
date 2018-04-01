@@ -4,9 +4,7 @@ public class CashPayment extends Payment {
 
     private String receiptNumber;
 
-    public CashPayment() {
-
-    }
+    public CashPayment() {}
 
     public CashPayment(double amount, Date date, String receiptNumber) {
         super(amount, date);
