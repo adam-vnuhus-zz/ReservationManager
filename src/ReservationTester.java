@@ -8,17 +8,20 @@ public class ReservationTester {
 
         random = new Random();
         Scanner scanner = new Scanner(System.in);
+
         int n;
         do {
-            System.out.println("Nhấn phím 1 để đặt chỗ, phím 0 để xem thông tin ");
+            System.out.println("Nhấn phím 1 để đặt chỗ hoặc phím 0 để xem thông tin.");
             n = Integer.parseInt(scanner.nextLine());
-        }while (n!=0 && n!=1);
+        } while (n != 0 && n != 1);
 
-        if (n==0) {
+        if (n == 0) {
+            
             System.out.print("Nhập mã đặt chỗ: ");
             print(Integer.parseInt(scanner.nextLine()));
-        }
-        else {
+
+        } else {
+
             Information information = new Information();
             List<Client> clients = new ArrayList<>();
             Map<String, Information> map = ConvertJson.getFromJSON("data.json");
@@ -26,19 +29,18 @@ public class ReservationTester {
             if (map == null) map = new HashMap<>();
 
             int tmp = 0;
-
             do {
                 Client client = new Client();
                 int check = 0;
                 String id;
                 do {
-                    if (check == 1){
-                        System.out.println("Bạn đã nhập trùng id, xin nhập lại");
+                    if (check == 1) {
+                        System.out.println("Bạn đã nhập trùng mã, xin nhập lại.");
                     }
                     System.out.print("Nhập mã khách hàng: ");
                     id = scanner.nextLine().trim();
                     check = 1;
-                }while (!checkIdExists(id,clients));
+                } while (!checkIdExists(id, clients));
 
                 client.setClientId(id);
                 Type type;
@@ -50,6 +52,7 @@ public class ReservationTester {
                 clients.add(client);
                 System.out.println("Nhấn phím 1 để tiếp tục nhập hoặc phím 0 để thoát nhập.");
                 tmp = Integer.parseInt(scanner.nextLine());
+
             } while (tmp == 1);
             information.setClients(clients);
 
@@ -88,10 +91,8 @@ public class ReservationTester {
             }
             information.setReservation(reservation);
             ConvertJson.toJSON(map, "data.json"); // Ghi data ra file
-            System.out.println("Nhập thông tin thành công");
+            System.out.println("Nhập thông tin thành công.");
         }
-
-
     }
 
     public static Type fromString(String str) {
@@ -100,9 +101,9 @@ public class ReservationTester {
         return null;
     }
 
-    public static boolean checkIdExists(String id, List<Client> clients){
+    public static boolean checkIdExists(String id, List<Client> clients) {
         ArrayList<String> tmp = new ArrayList<>();
-        for (int i =0; i<clients.size(); i++){
+        for (int i = 0; i < clients.size(); i++) {
             tmp.add(clients.get(i).getClientId());
         }
         if (tmp.contains(id)) return false;
@@ -114,8 +115,8 @@ public class ReservationTester {
         Map map = ConvertJson.getFromJSON("data.json");
         Information information = (Information) map.get(String.valueOf(j));
         Double amount;
-        if (information==null){
-            System.out.println("Mã đặt chỗ không tồn tại");
+        if (information == null) {
+            System.out.println("Mã đặt chỗ không tồn tại!!!");
             return;
         }
         Reservation reservation = information.getReservation();
@@ -143,12 +144,12 @@ public class ReservationTester {
             amount = cashPayment.getAmount();
         } else {
             System.out.println("Thanh toán bằng thẻ tín dụng.");
-            System.out.println("Số giao dịch tín dụng : " + creditPayment.getTransactionNumber());
-            System.out.println("Số thẻ tín dụng : " + creditPayment.getCardNumber());
-            System.out.println("Số tiền : " + creditPayment.getAmount());
+            System.out.println("Số giao dịch tín dụng: " + creditPayment.getTransactionNumber());
+            System.out.println("Số thẻ tín dụng: " + creditPayment.getCardNumber());
+            System.out.println("Số tiền: " + creditPayment.getAmount());
             System.out.println("Ngày giao dịch: " + creditPayment.getDate());
             amount = creditPayment.getAmount();
         }
-        System.out.println("Số tiền phải trả : " + reservation.getDueWithDiscount(clients,amount));
+        System.out.println("Số tiền phải trả: " + reservation.getDueWithDiscount(clients, amount));
     }
 }
