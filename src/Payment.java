@@ -1,12 +1,22 @@
 import java.util.Date;
 
 public class Payment {
-	private double amount;
-	private Date date;
 
-	public double getAmount() {
-		return amount;
-	}
+    private double amount;
+    private Date date;
+
+    public Payment() {
+
+    }
+
+    public Payment(double amount, Date date) {
+        this.amount = amount;
+        this.date = date;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
 
     public void setDate(Date date) {
         this.date = date;
@@ -17,17 +27,12 @@ public class Payment {
     }
 
     public void setAmount(double amount) {
-	    this.amount = amount;
+        this.amount = amount;
     }
-
-	public Payment(double amount, Date date) {
-		this.amount = amount;
-		this.date = date;
-	}
 
     @Override
     public String toString() {
-        return  " Payment{" +
+        return " Payment{" +
                 "amount=" + amount +
                 ", date=" + date +
                 '}';

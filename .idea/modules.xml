@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/_datcho.iml" filepath="$PROJECT_DIR$/_datcho.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reservationManager.iml" filepath="$PROJECT_DIR$/reservationManager.iml" />
     </modules>
   </component>
 </project>

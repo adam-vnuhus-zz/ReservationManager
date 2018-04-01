@@ -1,26 +1,41 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Information {
 
-    ArrayList<Client> clients;
+    Reservation reservation;
+    List<Client> clients;
     CreditPayment creditPayment;
     CashPayment cashPayment;
 
     public Information() {
-
+        this.reservation = new Reservation();
+        this.clients = new ArrayList<>();
+        this.creditPayment = new CreditPayment();
+        this.cashPayment = new CashPayment();
     }
 
-    public Information(ArrayList<Client> clients, CreditPayment creditPayment, CashPayment cashPayment) {
+    public Information(Reservation reservation, List<Client> clients, CreditPayment creditPayment, CashPayment cashPayment) {
+        this.reservation = reservation;
         this.clients = clients;
         this.creditPayment = creditPayment;
         this.cashPayment = cashPayment;
     }
 
-    public ArrayList<Client> getClients() {
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
+
+    public List<Client> getClients() {
+
         return clients;
     }
 
-    public void setClients(ArrayList<Client> clients) {
+    public void setClients(List<Client> clients) {
         this.clients = clients;
     }
 

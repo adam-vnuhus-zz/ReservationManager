@@ -1,11 +1,16 @@
 import java.util.Date;
 
-public class CreditPayment extends Payment{
+public class CreditPayment extends Payment {
+
     private String transactionNumber;
     private String cardNumber;
 
-    public CreditPayment(double amount, Date date, String transactionNumber,String cardNumber) {
-        super(amount,date);
+    public CreditPayment() {
+
+    }
+
+    public CreditPayment(double amount, Date date, String transactionNumber, String cardNumber) {
+        super(amount, date);
         this.transactionNumber = transactionNumber;
         this.cardNumber = cardNumber;
     }
@@ -28,7 +33,7 @@ public class CreditPayment extends Payment{
 
     @Override
     public String toString() {
-        return  super.toString() + "CreditPayment{" +
+        return super.toString() + "CreditPayment{" +
                 "transactionNumber='" + transactionNumber + '\'' +
                 ", cardNumber='" + cardNumber + '\'' +
                 '}';
