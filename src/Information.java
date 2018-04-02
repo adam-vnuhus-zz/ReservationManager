@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Information {
@@ -8,7 +7,8 @@ public class Information {
     CreditPayment creditPayment;
     CashPayment cashPayment;
 
-    public Information() { }
+    public Information() {
+    }
 
     public Information(Reservation reservation, List<Client> clients, CreditPayment creditPayment, CashPayment cashPayment) {
         this.reservation = reservation;
@@ -25,7 +25,9 @@ public class Information {
         this.reservation = reservation;
     }
 
-    public List<Client> getClients() {return clients; }
+    public List<Client> getClients() {
+        return clients;
+    }
 
     public void setClients(List<Client> clients) {
         this.clients = clients;

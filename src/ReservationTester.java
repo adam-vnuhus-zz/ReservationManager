@@ -1,67 +1,85 @@
 import java.io.FileNotFoundException;
 import java.util.*;
 
+import static java.lang.String.*;
+
 public class ReservationTester {
-    private static Random random;
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public void main() {
 
-        random = new Random();
         Scanner scanner = new Scanner(System.in);
 
         int n;
         do {
-            System.out.println("Nhấn phím 1 để đặt chỗ hoặc phím 0 để xem thông tin.");
+
+            System.out.println("Nhấn phím 1 để đặt chỗ " +
+                    "hoặc phím 0 để xem thông tin.");
             n = Integer.parseInt(scanner.nextLine());
+
         } while (n != 0 && n != 1);
 
         if (n == 0) {
-            
+
             System.out.print("Nhập mã đặt chỗ: ");
             print(Integer.parseInt(scanner.nextLine()));
 
         } else {
 
-            Information information = new Information();
+            Information information;
+            information = new Information();
             List<Client> clients = new ArrayList<>();
-            Map<String, Information> map = ConvertJson.getFromJSON("data.json");
+            Map<String, Information> map = null;
+            try {
+                map = ConvertJson.getFromJSON("data.json");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
 
             if (map == null) map = new HashMap<>();
 
             int tmp = 0;
             do {
+
                 Client client = new Client();
                 int check = 0;
                 String id;
                 do {
+
                     if (check == 1) {
                         System.out.println("Bạn đã nhập trùng mã, xin nhập lại.");
                     }
                     System.out.print("Nhập mã khách hàng: ");
                     id = scanner.nextLine().trim();
                     check = 1;
+
                 } while (!checkIdExists(id, clients));
 
                 client.setClientId(id);
                 Type type;
                 do {
+
                     System.out.print("Nhập loại [GOLD || SILVER || NORMAL]: ");
                     type = fromString(scanner.nextLine().trim());
                     client.setType(type);
+
                 } while (type == null);
                 clients.add(client);
-                System.out.println("Nhấn phím 1 để tiếp tục nhập hoặc phím 0 để thoát nhập.");
+                System.out.println("Nhấn phím 1 để tiếp tục nhập " +
+                        "hoặc phím 0 để thoát nhập.");
                 tmp = Integer.parseInt(scanner.nextLine());
 
             } while (tmp == 1);
+
             information.setClients(clients);
 
             tmp = 0;
             System.out.print("Nhập số tiền: ");
             Double amount = Double.parseDouble(scanner.nextLine());
-            System.out.println("Nhấn phím 1 để thanh toán bằng tiền mặt hoặc phím 0 để thanh toán bằng thẻ.");
-            CashPayment cashPayment = null;
-            CreditPayment creditPayment = null;
+            System.out.println("Nhấn phím 1 để thanh toán bằng tiền mặt " +
+                    "hoặc phím 0 để thanh toán bằng thẻ.");
+
+            CashPayment cashPayment;
+            CreditPayment creditPayment;
 
             do {
                 String temp = scanner.nextLine();
@@ -77,17 +95,21 @@ public class ReservationTester {
                     String transactionNumber = scanner.nextLine();
                     System.out.print("Nhập số thẻ: ");
                     String cardNumber = scanner.nextLine();
-                    creditPayment = new CreditPayment(amount, new Date(), transactionNumber, cardNumber);
+                    creditPayment = new CreditPayment(amount, new Date()
+                            , transactionNumber, cardNumber);
                     information.setCreditPayment(creditPayment);
                 } else System.out.print("Nhập lại: ");
+
             } while (tmp == 0);
+
             Reservation reservation = new Reservation();
+
             if (map == null) {
                 map.put("1", information);
                 reservation.setReservationNumber("1");
             } else {
-                map.put(String.valueOf(map.size() + 1), information);
-                reservation.setReservationNumber(String.valueOf(map.size()));
+                map.put(valueOf(map.size() + 1), information);
+                reservation.setReservationNumber(valueOf(map.size()));
             }
             information.setReservation(reservation);
             ConvertJson.toJSON(map, "data.json"); // Ghi data ra file
@@ -97,7 +119,7 @@ public class ReservationTester {
 
     public static Type fromString(String str) {
         for (Type type : Type.values())
-            if (String.valueOf(type).equals(str)) return type;
+            if (valueOf(type).equals(str)) return type;
         return null;
     }
 
@@ -110,10 +132,17 @@ public class ReservationTester {
         return true;
     }
 
-    public static void print(int j) throws FileNotFoundException {
+    public static void print(int j) {
 
-        Map map = ConvertJson.getFromJSON("data.json");
-        Information information = (Information) map.get(String.valueOf(j));
+        Map map = null;
+        try {
+            map = ConvertJson.getFromJSON("data.json");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Information information;
+        information = (Information) map.get(valueOf(j));
         Double amount;
         if (information == null) {
             System.out.println("Mã đặt chỗ không tồn tại!!!");
@@ -130,7 +159,8 @@ public class ReservationTester {
 
         System.out.println("Thông tin các khách hàng.");
         for (int i = 0; i < clients.size(); i++)
-            System.out.println("id = " + clients.get(i).getClientId() + " type = " + clients.get(i).getType());
+            System.out.println("id = " + clients.get(i).getClientId()
+                    + " type = " + clients.get(i).getType());
 
         // In ra thong tin thanh toan
 

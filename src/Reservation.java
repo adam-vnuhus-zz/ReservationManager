@@ -1,12 +1,10 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
-import java.util.regex.Pattern;
 
 public class Reservation {
     private String reservationNumber;
 
-    public Reservation() {}
+    public Reservation() {
+    }
 
     public Reservation(String reservationNumber) {
         this.reservationNumber = reservationNumber;
@@ -20,21 +18,33 @@ public class Reservation {
         this.reservationNumber = reservationNumber;
     }
 
-    public double getDueWithDiscount(List<Client> clients,double amount){
+    public double getDueWithDiscount(List<Client> clients, double amount) {
         int max = 0;
+
         List<Integer> values = new ArrayList<>();
-        for (int i = 0; i<clients.size(); i++){
+
+        for (int i = 0; i < clients.size(); i++) {
+
             Type type = clients.get(i).getType();
-            switch (type){
-                case GOLD : {values.add(2); break;}
-                case SILVER : {values.add(1); break;}
-                case NORMAL : {values.add(0); break;}
+            switch (type) {
+                case GOLD: {
+                    values.add(2);
+                    break;
+                }
+                case SILVER: {
+                    values.add(1);
+                    break;
+                }
+                case NORMAL: {
+                    values.add(0);
+                    break;
+                }
             }
         }
         max = Collections.max(values);
 
-        // round double
-        double amountWithDiscount = amount-(amount*max/10);
+        // round double làm tròn số
+        double amountWithDiscount = amount - (amount * max / 10);
         double scale = Math.pow(10, 2);
         return Math.round(amountWithDiscount * scale) / scale;
     }
