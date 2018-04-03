@@ -4,8 +4,11 @@ import java.util.List;
 public class Data {
     public static Information getInformation(int index) throws FileNotFoundException {
         List list = ConvertJson.getFromJSON("data.json");
+        // Kiểm tra sự tồn tại của chỉ số index, nếu không tồn tại index thì information trả về null
+        // Ở đây index == (mã đặt chỗ)-1 vì mã đặt chỗ bắt đầu từ 1, list bắt đầu từ 0
         Information information = null;
         if (list == null || index-list.size() >= 0 || index<0) return information;
+        // Nếu tồn tại chỉ số thì trả về information 
         information = (Information) list.get(index);
         return information;
     }
