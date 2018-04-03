@@ -100,8 +100,7 @@ public class ReservationTester {
             reservation.setReservationNumber(String.valueOf(list.size()));
             information.setReservation(reservation);
             ConvertJson.toJSON(list, "data.json"); // Ghi data ra file
-            System.out.println("Nhập thông tin thành công");
+            System.out.println("Nhập thông tin thành công.");
         }
     }
-
 }
