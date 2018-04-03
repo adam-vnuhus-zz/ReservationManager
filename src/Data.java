@@ -5,7 +5,7 @@ public class Data {
     public static Information getInformation(int index) throws FileNotFoundException {
         List list = ConvertJson.getFromJSON("data.json");
         Information information = null;
-        if (index-list.size() >= 0 || index<0) return information;
+        if (list == null || index-list.size() >= 0 || index<0) return information;
         information = (Information) list.get(index);
         return information;
     }

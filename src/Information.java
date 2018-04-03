@@ -2,13 +2,12 @@ import java.util.List;
 
 public class Information {
 
-    Reservation reservation;
-    List<Client> clients;
-    CreditPayment creditPayment;
-    CashPayment cashPayment;
+    private Reservation reservation;
+    private List<Client> clients;
+    private CreditPayment creditPayment;
+    private CashPayment cashPayment;
 
-    public Information() {
-    }
+    public Information(){}
 
     public Information(Reservation reservation, List<Client> clients, CreditPayment creditPayment, CashPayment cashPayment) {
         this.reservation = reservation;
