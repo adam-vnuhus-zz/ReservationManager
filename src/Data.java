@@ -2,8 +2,9 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 public class Data {
+    // Lấy 1 obj information từ file JSON tại vị trí index   
     public static Information getInformation(int index) throws FileNotFoundException {
-        List list = ConvertJson.getFromJSON("data.json");
+        List list = ConvertJson.getFromJSON("data.json"); // Xem cmt trong ConvertJson.class
         // Kiểm tra sự tồn tại của chỉ số index, nếu không tồn tại index thì information trả về null
         // Ở đây index == (mã đặt chỗ)-1 vì mã đặt chỗ bắt đầu từ 1, list bắt đầu từ 0
         Information information = null;
@@ -12,7 +13,8 @@ public class Data {
         information = (Information) list.get(index);
         return information;
     }
-
+    
+    // In 1 obj information ra console
     public static void showData(Information information){
         Double amount;
         Reservation reservation = information.getReservation();
