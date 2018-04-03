@@ -14,7 +14,7 @@ public class ReservationTester {
 
     public static Type fromString(String str) {
         for (Type type : Type.values())
-            if (String.valueOf(type).equals(str)) return type;
+            if (String.valueOf(type).equals(str.toUpperCase())) return type;
         return null;
     }
 
