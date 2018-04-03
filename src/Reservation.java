@@ -1,12 +1,9 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
-import java.util.regex.Pattern;
 
 public class Reservation {
     private String reservationNumber;
 
-    public Reservation() {}
+    public Reservation(){}
 
     public Reservation(String reservationNumber) {
         this.reservationNumber = reservationNumber;

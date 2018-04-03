@@ -2,28 +2,45 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class ReservationTester {
-    private static Random random;
-
+    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) throws FileNotFoundException {
+       int in;
+       do {
+           System.out.println("Nhấn phím 1 để đặt chỗ, phím 0 để xem thông tin ");
+           in = Integer.parseInt(scanner.nextLine());
+       }while (in!=0 && in!=1);
+       input(in);
+    }
 
-        random = new Random();
-        Scanner scanner = new Scanner(System.in);
-        int n;
-        do {
-            System.out.println("Nhấn phím 1 để đặt chỗ, phím 0 để xem thông tin ");
-            n = Integer.parseInt(scanner.nextLine());
-        }while (n!=0 && n!=1);
+    public static Type fromString(String str) {
+        for (Type type : Type.values())
+            if (String.valueOf(type).equals(str)) return type;
+        return null;
+    }
 
-        if (n==0) {
+    public static boolean checkIdExists(String id, List<Client> clients){
+        ArrayList<String> tmp = new ArrayList<>();
+        for (int i =0; i<clients.size(); i++){
+            tmp.add(clients.get(i).getClientId());
+        }
+        if (tmp.contains(id)) return false;
+        return true;
+    }
+
+    public static void input(int in) throws FileNotFoundException {
+        if (in==0) {
             System.out.print("Nhập mã đặt chỗ: ");
-            print(Integer.parseInt(scanner.nextLine()));
+            int reservationNumber = Integer.parseInt(scanner.nextLine());
+            Information information = Data.getInformation(reservationNumber-1);
+            if (information == null) System.out.println("Mã đặt chỗ không tồn tại");
+            else Data.showData(information);
         }
         else {
             Information information = new Information();
             List<Client> clients = new ArrayList<>();
-            Map<String, Information> map = ConvertJson.getFromJSON("data.json");
+            List<Information> list = ConvertJson.getFromJSON("data.json");
 
-            if (map == null) map = new HashMap<>();
+            if (list == null) list = new ArrayList<>();
 
             int tmp = 0;
 
@@ -79,76 +96,12 @@ public class ReservationTester {
                 } else System.out.print("Nhập lại: ");
             } while (tmp == 0);
             Reservation reservation = new Reservation();
-            if (map == null) {
-                map.put("1", information);
-                reservation.setReservationNumber("1");
-            } else {
-                map.put(String.valueOf(map.size() + 1), information);
-                reservation.setReservationNumber(String.valueOf(map.size()));
-            }
+            list.add(information);
+            reservation.setReservationNumber(String.valueOf(list.size()));
             information.setReservation(reservation);
-            ConvertJson.toJSON(map, "data.json"); // Ghi data ra file
+            ConvertJson.toJSON(list, "data.json"); // Ghi data ra file
             System.out.println("Nhập thông tin thành công");
         }
-
-
     }
 
-    public static Type fromString(String str) {
-        for (Type type : Type.values())
-            if (String.valueOf(type).equals(str)) return type;
-        return null;
-    }
-
-    public static boolean checkIdExists(String id, List<Client> clients){
-        ArrayList<String> tmp = new ArrayList<>();
-        for (int i =0; i<clients.size(); i++){
-            tmp.add(clients.get(i).getClientId());
-        }
-        if (tmp.contains(id)) return false;
-        return true;
-    }
-
-    public static void print(int j) throws FileNotFoundException {
-
-        Map map = ConvertJson.getFromJSON("data.json");
-        Information information = (Information) map.get(String.valueOf(j));
-        Double amount;
-        if (information==null){
-            System.out.println("Mã đặt chỗ không tồn tại");
-            return;
-        }
-        Reservation reservation = information.getReservation();
-        List<Client> clients = information.getClients();
-        CreditPayment creditPayment = information.getCreditPayment();
-        CashPayment cashPayment = information.getCashPayment();
-
-        System.out.println("Mã đặt chỗ: " + reservation.getReservationNumber());
-
-        // In ra thong tin khach hang
-
-        System.out.println("Thông tin các khách hàng.");
-        for (int i = 0; i < clients.size(); i++)
-            System.out.println("id = " + clients.get(i).getClientId() + " type = " + clients.get(i).getType());
-
-        // In ra thong tin thanh toan
-
-        System.out.println("_______________________________");
-        System.out.println("Thông tin thanh toán.");
-        if (cashPayment != null) {
-            System.out.println("Thanh toán bằng tiền mặt.");
-            System.out.println("Số hóa đơn: " + cashPayment.getReceiptNumber());
-            System.out.println("Số tiền: " + cashPayment.getAmount());
-            System.out.println("Ngày giao dịch: " + cashPayment.getDate());
-            amount = cashPayment.getAmount();
-        } else {
-            System.out.println("Thanh toán bằng thẻ tín dụng.");
-            System.out.println("Số giao dịch tín dụng : " + creditPayment.getTransactionNumber());
-            System.out.println("Số thẻ tín dụng : " + creditPayment.getCardNumber());
-            System.out.println("Số tiền : " + creditPayment.getAmount());
-            System.out.println("Ngày giao dịch: " + creditPayment.getDate());
-            amount = creditPayment.getAmount();
-        }
-        System.out.println("Số tiền phải trả : " + reservation.getDueWithDiscount(clients,amount));
-    }
 }
