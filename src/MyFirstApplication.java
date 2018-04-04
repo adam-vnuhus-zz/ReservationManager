@@ -39,7 +39,7 @@ import javax.swing.JList;
 import javax.swing.JSeparator;
 import java.awt.SystemColor;
 
-public class MyFirstApplication {
+public class MyFirstApplication extends JFrame {
 
 	JFrame frameOrderRecord;
 	private JTextField textFieldClientId;
@@ -71,15 +71,18 @@ public class MyFirstApplication {
 	 * Create the application.
 	 */
 	public MyFirstApplication() {
-		initialize();
+		this.setTitle("OrderRecord");
+		this.setBounds(0, 0, 1040, 600);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().setLayout(new CardLayout(0, 0));
+		this.initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frameOrderRecord = new JFrame();
-		frameOrderRecord.addWindowListener(new WindowAdapter() {
+		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent arg0) {
 				textFieldReceiptNumber.setEnabled(false);
@@ -87,13 +90,9 @@ public class MyFirstApplication {
 				textFieldCardNumber.setEnabled(false);
 			}
 		});
-		frameOrderRecord.setTitle("OrderRecord");
-		frameOrderRecord.setBounds(0, 0, 1040, 600);
-		frameOrderRecord.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameOrderRecord.getContentPane().setLayout(new CardLayout(0, 0));
 
 		JPanel panel_4 = new JPanel();
-		frameOrderRecord.getContentPane().add(panel_4, "name_310906480175598");
+		this.getContentPane().add(panel_4, "name_310906480175598");
 		panel_4.setLayout(null);
 		panel_4.setVisible(true);
 
@@ -104,10 +103,10 @@ public class MyFirstApplication {
 		panel_4.add(panel_5);
 		panel_5.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Client Id:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel.setBounds(22, 41, 105, 14);
-		panel_5.add(lblNewLabel);
+		JLabel lblClientId = new JLabel("Client Id:");
+		lblClientId.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblClientId.setBounds(22, 41, 105, 14);
+		panel_5.add(lblClientId);
 
 		textFieldClientId = new JTextField();
 		textFieldClientId.setFont(new Font("Tahoma", Font.ITALIC, 13));
@@ -116,24 +115,29 @@ public class MyFirstApplication {
 		panel_5.add(textFieldClientId);
 		textFieldClientId.setColumns(10);
 
-		JLabel lblNewLabel_1 = new JLabel("Type:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_1.setBounds(322, 41, 105, 14);
-		panel_5.add(lblNewLabel_1);
+		JLabel lblType = new JLabel("Type:");
+		lblType.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblType.setBounds(322, 41, 105, 14);
+		panel_5.add(lblType);
 		JRadioButton rdbtnCreditpayment = new JRadioButton("CreditPayment");
 		rdbtnCreditpayment.setFont(new Font("Tahoma", Font.BOLD, 11));
 		JRadioButton rdbtnCashpayment = new JRadioButton("CashPayment");
 		rdbtnCashpayment.setFont(new Font("Tahoma", Font.BOLD, 11));
+
 		rdbtnCashpayment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (rdbtnCashpayment.isSelected()) {
 					rdbtnCreditpayment.setSelected(false);
 					textFieldReceiptNumber.setEnabled(true);
+					textFieldCardNumber.setEnabled(false);
+					textFieldTransactionNumber.setEnabled(false);
 					textFieldReceiptNumber.setText("0");
+					textFieldCardNumber.setText("0");
+					textFieldTransactionNumber.setText("0");
 					textFieldReceiptNumber.requestFocus();
 				} else {
 					textFieldReceiptNumber.setEnabled(false);
-					textFieldReceiptNumber.setText("");
+					textFieldReceiptNumber.setText("0");
 				}
 			}
 		});
@@ -144,17 +148,19 @@ public class MyFirstApplication {
 			public void actionPerformed(ActionEvent arg0) {
 				if (rdbtnCreditpayment.isSelected()) {
 					rdbtnCashpayment.setSelected(false);
+					textFieldReceiptNumber.setEnabled(false);
 					textFieldCardNumber.setEnabled(true);
 					textFieldTransactionNumber.setEnabled(true);
 					textFieldCardNumber.setText("0");
 					textFieldTransactionNumber.setText("0");
+					textFieldReceiptNumber.setText("0");
 					textFieldCardNumber.requestFocus();
 					textFieldTransactionNumber.requestFocus();
 				} else {
 					textFieldCardNumber.setEnabled(false);
-					textFieldCardNumber.setText("");
+					textFieldCardNumber.setText("0");
 					textFieldTransactionNumber.setEnabled(false);
-					textFieldTransactionNumber.setText("");
+					textFieldTransactionNumber.setText("0");
 				}
 			}
 		});
@@ -232,12 +238,14 @@ public class MyFirstApplication {
 		textFieldTotal.setBounds(151, 304, 119, 20);
 		panel_5.add(textFieldTotal);
 		textFieldTotal.setColumns(10);
+		textFieldTotal.setEnabled(false);
+		textFieldTotal.setText("0");
 
 		JComboBox comboBoxType = new JComboBox();
 		comboBoxType.setModel(new DefaultComboBoxModel(new String[] { "", "GOLD", "SILVER", "NORMAL" }));
 		comboBoxType.setBounds(450, 37, 119, 22);
 		panel_5.add(comboBoxType);
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setForeground(SystemColor.desktop);
 		separator.setBounds(22, 285, 547, 2);

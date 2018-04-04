@@ -32,6 +32,8 @@ public class Client {
         return this.clientId;
     }
 
+
+
     @Override
     public String toString() {
         return "Client [clientId=" + clientId + ", type=" + type + "]";

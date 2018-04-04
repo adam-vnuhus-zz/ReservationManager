@@ -3,13 +3,14 @@ import java.util.*;
 
 public class ReservationTester {
     static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) throws FileNotFoundException {
-       int in;
-       do {
-           System.out.println("Nhấn phím 1 để đặt chỗ, phím 0 để xem thông tin ");
-           in = Integer.parseInt(scanner.nextLine());
-       }while (in!=0 && in!=1);
-       input(in);
+        int in;
+        do {
+            System.out.println("Nhấn phím 1 để đặt chỗ, phím 0 để xem thông tin ");
+            in = Integer.parseInt(scanner.nextLine());
+        } while (in != 0 && in != 1);
+        input(in);
     }
 
     public static Type fromString(String str) {
@@ -18,9 +19,9 @@ public class ReservationTester {
         return null;
     }
 
-    public static boolean checkIdExists(String id, List<Client> clients){
+    public static boolean checkIdExists(String id, List<Client> clients) {
         ArrayList<String> tmp = new ArrayList<>();
-        for (int i =0; i<clients.size(); i++){
+        for (int i = 0; i < clients.size(); i++) {
             tmp.add(clients.get(i).getClientId());
         }
         if (tmp.contains(id)) return false;
@@ -28,14 +29,13 @@ public class ReservationTester {
     }
 
     public static void input(int in) throws FileNotFoundException {
-        if (in==0) {
+        if (in == 0) {
             System.out.print("Nhập mã đặt chỗ: ");
             int reservationNumber = Integer.parseInt(scanner.nextLine());
-            Information information = Data.getInformation(reservationNumber-1);
+            Information information = Data.getInformation(reservationNumber - 1);
             if (information == null) System.out.println("Mã đặt chỗ không tồn tại");
             else Data.showData(information);
-        }
-        else {
+        } else {
             Information information = new Information();
             List<Client> clients = new ArrayList<>();
             List<Information> list = ConvertJson.getFromJSON("data.json");
@@ -49,13 +49,13 @@ public class ReservationTester {
                 int check = 0;
                 String id;
                 do {
-                    if (check == 1){
+                    if (check == 1) {
                         System.out.println("Bạn đã nhập trùng id, xin nhập lại");
                     }
                     System.out.print("Nhập mã khách hàng: ");
                     id = scanner.nextLine().trim();
                     check = 1;
-                }while (!checkIdExists(id,clients));
+                } while (!checkIdExists(id, clients));
 
                 client.setClientId(id);
                 Type type;

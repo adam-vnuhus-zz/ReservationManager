@@ -85,13 +85,13 @@ public class LoginSystem {
 
 				String password = txtPassword.getText();
 				String username = txtUsername.getText();
-				
+
 				if (password.contains("admin") && username.contains("admin")) {
 					txtPassword.setText(null);
 					txtUsername.setText(null);
 
-					MyFirstApplication window = new MyFirstApplication();
-					window.frameOrderRecord.setVisible(true);
+					MyFirstApplication myFirstApplication = new MyFirstApplication();
+					myFirstApplication.setVisible(true);
 				} else {
 					JOptionPane.showMessageDialog(null, "Invalid Login Details", "Login Error",
 							JOptionPane.ERROR_MESSAGE);
