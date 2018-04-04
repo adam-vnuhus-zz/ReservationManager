@@ -8,14 +8,14 @@ public class Data {
         // Kiểm tra sự tồn tại của chỉ số index, nếu không tồn tại index thì information trả về null
         // Ở đây index == (mã đặt chỗ)-1 vì mã đặt chỗ bắt đầu từ 1, list bắt đầu từ 0
         Information information = null;
-        if (list == null || index-list.size() >= 0 || index<0) return information;
+        if (list == null || index - list.size() >= 0 || index < 0) return information;
         // Nếu tồn tại chỉ số thì trả về information 
         information = (Information) list.get(index);
         return information;
     }
-    
+
     // In 1 obj information ra console
-    public static void showData(Information information){
+    public static void showData(Information information) {
         Double amount;
         Reservation reservation = information.getReservation();
         List<Client> clients = information.getClients();
@@ -48,6 +48,6 @@ public class Data {
             System.out.println("Ngày giao dịch: " + creditPayment.getDate());
             amount = creditPayment.getAmount();
         }
-        System.out.println("Số tiền phải trả : " + reservation.getDueWithDiscount(clients,amount));
+        System.out.println("Số tiền phải trả : " + reservation.getDueWithDiscount(clients, amount));
     }
 }

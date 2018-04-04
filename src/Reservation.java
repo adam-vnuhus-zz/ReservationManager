@@ -31,7 +31,7 @@ public class Reservation {
         max = Collections.max(values);
 
         // round double
-        double amountWithDiscount = amount-(amount*max/10);
+        double amountWithDiscount = amount - (amount * max / 10);
         double scale = Math.pow(10, 2);
         return Math.round(amountWithDiscount * scale) / scale;
     }

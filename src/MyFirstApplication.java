@@ -15,12 +15,11 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JRadioButton;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.awt.print.PrinterException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Timer;
-import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import java.awt.FlowLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -32,8 +31,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
 import javax.swing.JSeparator;
@@ -75,8 +72,6 @@ public class MyFirstApplication extends JFrame {
                 textFieldReceiptNumber.setText("0");
                 textFieldTransactionNumber.setText("0");
                 textFieldCardNumber.setText("0");
-                textFieldAmount.setEnabled(false);
-                textFieldAmount.setText("0");
             }
         });
 
@@ -198,6 +193,23 @@ public class MyFirstApplication extends JFrame {
         panel_5.add(lblAmount);
 
         textFieldAmount = new JTextField();
+        textFieldAmount.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent arg0) {
+                try {
+                    KeyEvent evt = arg0;
+                    char iNumber = evt.getKeyChar();
+                    if (!(Character.isDigit(iNumber))
+                            || (iNumber == KeyEvent.VK_BACK_SPACE)
+                            || (iNumber == KeyEvent.VK_DELETE)) {
+                        evt.consume();
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showConfirmDialog(null, "Order Systems Error");
+                }
+
+            }
+        });
         textFieldAmount.setFont(new Font("Tahoma", Font.ITALIC, 13));
         textFieldAmount.setHorizontalAlignment(SwingConstants.LEFT);
         textFieldAmount.setBounds(151, 210, 119, 20);
@@ -326,6 +338,7 @@ public class MyFirstApplication extends JFrame {
             public void actionPerformed(ActionEvent arg0) {
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
                 model.addRow(new Object[]{textFieldReservationNumber.getText(), textFieldClientId.getText(),
+                        // textFieldType.getText(),
                         comboBoxType.getSelectedItem(), textFieldReceiptNumber.getText(),
                         textFieldTransactionNumber.getText(), textFieldCardNumber.getText(),
                         textFieldAmount.getText(),});
