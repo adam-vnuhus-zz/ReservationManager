@@ -5,8 +5,10 @@ public class Main {
         /**
          * Launch the application.
          */
-        MyFirstApplication myFirstApplication = new MyFirstApplication();
-        myFirstApplication.setVisible(true);
+        LoginSystem window = new LoginSystem();
+        window.frame.setVisible(true);
+//        MyFirstApplication myFirstApplication = new MyFirstApplication();
+//        myFirstApplication.setVisible(true);
     }
 
 }

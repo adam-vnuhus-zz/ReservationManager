@@ -324,6 +324,8 @@ public class MyFirstApplication extends JFrame {
                 textFieldTotal.setText(null);
                 textOrderTranscript.setText(null);
                 comboBoxType.setSelectedItem("");
+                textFieldTotal.setEnabled(false);
+                textFieldTotal.setText("0");
 
                 rdbtnCashpayment.setSelected(false);
                 rdbtnCreditpayment.setSelected(false);
@@ -395,6 +397,7 @@ public class MyFirstApplication extends JFrame {
                 }
                 String totalString = new Double(total).toString();
                 textFieldTotal.setText(totalString);
+                textFieldTotal.setEnabled(true);
             }
         });
         btnTotal.setBounds(850, 505, 124, 45);

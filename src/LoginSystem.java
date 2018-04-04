@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
-public class LoginSystem {
+public class LoginSystem extends JFrame {
 
     JFrame frame;
     private JTextField txtUsername;
@@ -19,23 +19,7 @@ public class LoginSystem {
     private JButton btnLogin;
     private JButton btnReset;
     private JButton btnExit;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    LoginSystem window = new LoginSystem();
-                    window.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
+    
     /**
      * Create the application.
      */
@@ -83,6 +67,8 @@ public class LoginSystem {
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
 
+                frame.setVisible(false);
+
                 String password = txtPassword.getText();
                 String username = txtUsername.getText();
 
@@ -92,12 +78,14 @@ public class LoginSystem {
 
                     MyFirstApplication myFirstApplication = new MyFirstApplication();
                     myFirstApplication.setVisible(true);
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Login Details", "Login Error",
                             JOptionPane.ERROR_MESSAGE);
                     txtPassword.setText(null);
                     txtUsername.setText(null);
                 }
+
             }
         });
         btnLogin.setBounds(58, 221, 125, 34);
@@ -122,6 +110,7 @@ public class LoginSystem {
                 if (JOptionPane.showConfirmDialog(frameLoginSystem, "Confirm if you want to exit", "Login System",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
                     System.exit(0);
+
                 }
             }
         });
