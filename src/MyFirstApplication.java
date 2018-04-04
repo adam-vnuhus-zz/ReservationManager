@@ -382,7 +382,19 @@ public class MyFirstApplication extends JFrame {
         btnTotal.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnTotal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                textFieldTotal.setText(textFieldAmount.getText());
+                double total = 0.0;
+                if (comboBoxType.getSelectedItem().equals("GOLD")) {
+                    double amount = Double.parseDouble(textFieldAmount.getText());
+                    total = total + amount - amount * 0.2;
+                } else if (comboBoxType.getSelectedItem().equals("SILVER")) {
+                    double amount = Double.parseDouble(textFieldAmount.getText());
+                    total = total + amount - amount * 0.1;
+                } else if (comboBoxType.getSelectedItem().equals("NORMAL")) {
+                    double amount = Double.parseDouble(textFieldAmount.getText());
+                    total = total + amount;
+                }
+                String totalString = new Double(total).toString();
+                textFieldTotal.setText(totalString);
             }
         });
         btnTotal.setBounds(850, 505, 124, 45);
