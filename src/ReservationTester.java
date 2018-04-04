@@ -7,7 +7,7 @@ public class ReservationTester {
     public static void main(String[] args) throws FileNotFoundException {
         int in;
         do {
-            System.out.println("Nhấn phím 1 để đặt chỗ, phím 0 để xem thông tin ");
+            System.out.println("Nhấn phím 1 để đặt chỗ hoặc phím 0 để xem thông tin.");
             in = Integer.parseInt(scanner.nextLine());
         } while (in != 0 && in != 1);
         input(in);
@@ -33,7 +33,7 @@ public class ReservationTester {
             System.out.print("Nhập mã đặt chỗ: ");
             int reservationNumber = Integer.parseInt(scanner.nextLine());
             Information information = Data.getInformation(reservationNumber - 1);
-            if (information == null) System.out.println("Mã đặt chỗ không tồn tại");
+            if (information == null) System.out.println("Mã đặt chỗ không tồn tại!!!");
             else Data.showData(information);
         } else {
             Information information = new Information();
@@ -50,7 +50,7 @@ public class ReservationTester {
                 String id;
                 do {
                     if (check == 1) {
-                        System.out.println("Bạn đã nhập trùng id, xin nhập lại");
+                        System.out.println("Bạn đã nhập trùng id, xin nhập lại!!!");
                     }
                     System.out.print("Nhập mã khách hàng: ");
                     id = scanner.nextLine().trim();
