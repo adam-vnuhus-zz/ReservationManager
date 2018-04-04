@@ -52,22 +52,6 @@ public class MyFirstApplication extends JFrame {
     protected static JTextField textFieldTotal;
 
     /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    MyFirstApplication window = new MyFirstApplication();
-                    window.frameOrderRecord.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    /**
      * Create the application.
      */
     public MyFirstApplication() {
@@ -88,6 +72,11 @@ public class MyFirstApplication extends JFrame {
                 textFieldReceiptNumber.setEnabled(false);
                 textFieldTransactionNumber.setEnabled(false);
                 textFieldCardNumber.setEnabled(false);
+                textFieldReceiptNumber.setText("0");
+                textFieldTransactionNumber.setText("0");
+                textFieldCardNumber.setText("0");
+                textFieldAmount.setEnabled(false);
+                textFieldAmount.setText("0");
             }
         });
 
@@ -131,7 +120,7 @@ public class MyFirstApplication extends JFrame {
                     textFieldReceiptNumber.setEnabled(true);
                     textFieldCardNumber.setEnabled(false);
                     textFieldTransactionNumber.setEnabled(false);
-                    textFieldReceiptNumber.setText("0");
+                    textFieldReceiptNumber.setText(null);
                     textFieldCardNumber.setText("0");
                     textFieldTransactionNumber.setText("0");
                     textFieldReceiptNumber.requestFocus();
@@ -151,8 +140,8 @@ public class MyFirstApplication extends JFrame {
                     textFieldReceiptNumber.setEnabled(false);
                     textFieldCardNumber.setEnabled(true);
                     textFieldTransactionNumber.setEnabled(true);
-                    textFieldCardNumber.setText("0");
-                    textFieldTransactionNumber.setText("0");
+                    textFieldCardNumber.setText(null);
+                    textFieldTransactionNumber.setText(null);
                     textFieldReceiptNumber.setText("0");
                     textFieldCardNumber.requestFocus();
                     textFieldTransactionNumber.requestFocus();
@@ -331,20 +320,19 @@ public class MyFirstApplication extends JFrame {
         btnReset.setBounds(578, 505, 124, 45);
         panel_4.add(btnReset);
 
-        JButton btnSaveData = new JButton("Save Data");
-        btnSaveData.setFont(new Font("Tahoma", Font.BOLD, 11));
-        btnSaveData.addActionListener(new ActionListener() {
+        JButton btnDetails = new JButton("Details");
+        btnDetails.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnDetails.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
                 model.addRow(new Object[]{textFieldReservationNumber.getText(), textFieldClientId.getText(),
-                        // textFieldType.getText(),
                         comboBoxType.getSelectedItem(), textFieldReceiptNumber.getText(),
                         textFieldTransactionNumber.getText(), textFieldCardNumber.getText(),
                         textFieldAmount.getText(),});
             }
         });
-        btnSaveData.setBounds(310, 505, 124, 45);
-        panel_4.add(btnSaveData);
+        btnDetails.setBounds(310, 505, 124, 45);
+        panel_4.add(btnDetails);
 
         JButton btnTranscript = new JButton("Transcript");
         btnTranscript.setFont(new Font("Tahoma", Font.BOLD, 11));

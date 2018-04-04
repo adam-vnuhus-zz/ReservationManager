@@ -2,7 +2,9 @@
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		/**
+		 * Launch the application.
+		 */
 		MyFirstApplication myFirstApplication = new MyFirstApplication();
 		myFirstApplication.setVisible(true);
 	}
