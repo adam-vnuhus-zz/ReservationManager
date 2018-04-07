@@ -70,8 +70,8 @@ public class LoginSystem extends JFrame {
                     myFirstApplication.setVisible(true);
 
                 } else {
-                    JOptionPane.showMessageDialog(null, "Invalid Login Details", "Login Error",
-                            JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Invalid Login Details"
+                            , "Login Error", JOptionPane.ERROR_MESSAGE);
                     txtPassword.setText(null);
                     txtUsername.setText(null);
                 }
@@ -96,8 +96,8 @@ public class LoginSystem extends JFrame {
         btnExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFrame frameLoginSystem = new JFrame("Exit");
-                if (JOptionPane.showConfirmDialog(frameLoginSystem, "Confirm if you want to exit", "Login System",
-                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+                if (JOptionPane.showConfirmDialog(frameLoginSystem, "Confirm if you want to exit"
+                        , "Login System", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
                     System.exit(0);
 
                 }
